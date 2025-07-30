@@ -48,6 +48,16 @@ class _InAppWebViewExampleState extends State<InAppWebViewExample> {
                   initialUrlRequest: URLRequest(
                     url: WebUri('https://close-river-4184.glide.page/dl/63325b'),
                   ),
+                  initialSettings: InAppWebViewSettings(
+                    javaScriptEnabled: true,
+                    disableDefaultErrorPage: true,
+
+                    mediaPlaybackRequiresUserGesture: false,
+                    allowsInlineMediaPlayback: true,
+                    allowsPictureInPictureMediaPlayback: true,
+                    useOnDownloadStart: true,
+                    javaScriptCanOpenWindowsAutomatically: true,
+                  ),
                   onWebViewCreated: (controller) {
                     webViewController = controller;
                   },
