@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -19,17 +21,21 @@ class _InAppWebViewExampleState extends State<InAppWebViewExample> {
   InAppWebViewController? webViewController;
   bool isLoading = true;
 
-  // Фиксированная высота белого контейнера
-  final double whiteBarHeight = 0.0;
-
   @override
   Widget build(BuildContext context) {
-    final double safeTop = MediaQuery.of(context).padding.top;
+    final double safeTop = MediaQuery.of(context).padding.top-10;
+
+    bool isIPhone(BuildContext context) {
+      // Только для iOS
+      if (kIsWeb || !Platform.isIOS) return false;
+      // Обычно iPad имеет ширину больше 600 логических пикселей
+      final double width = MediaQuery.of(context).size.shortestSide;
+      return width < 600;
+    }
 
     return SafeArea(
       child: Scaffold(
         body: SafeArea(
-          // SafeArea только по бокам, верх перекроем вручную
           left: true,
           right: true,
           top: true,
@@ -57,16 +63,17 @@ class _InAppWebViewExampleState extends State<InAppWebViewExample> {
                   },
                 ),
               ),
-              // Белый контейнер перекрывает WebView сверху
-              Positioned(
-                left: 0,
-                top: 0,
-                right: 0,
-                height: safeTop,
-                child: Container(
-                  color: Color(0xFF00826D),
+              // Показывать цветную плашку только на iPhone/iPad
+              if (isIPhone(context))
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  right: 0,
+                  height: safeTop,
+                  child: Container(
+                    color: const Color(0xFF00826D),
+                  ),
                 ),
-              ),
               // Лоадер по центру
               if (isLoading)
                 const Center(
