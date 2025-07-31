@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>We use your camera to let you add photos to your event entries. For example, you can take a picture of a memorable moment and attach it to your event in the app.</string>
+	<string>We use your camera to let you add photos to events, holidays, luck path</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
